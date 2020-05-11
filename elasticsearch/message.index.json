@@ -1,0 +1,72 @@
+{
+  "settings": {
+    "index": {
+      "analysis": {
+        "analyzer": {
+          "edgengram_topic": {
+            "filter": [
+              "edgengram_topic",
+              "lowercase"
+            ],
+            "tokenizer": "keyword"
+          }
+        },
+        "filter": {
+          "edgengram_topic": {
+            "max_gram": "50",
+            "min_gram": "1",
+            "type": "edge_ngram"
+          }
+        }
+      },
+      "number_of_replicas": 0,
+      "number_of_shards": 1
+    }
+  },
+  "mappings": {
+    "dynamic": "strict",
+    "properties": {
+      "key": {
+        "type": "keyword",
+      },
+      "topics": {
+        "type": "text",
+        "analyzer": "edgengram_topic",
+        "search_analyzer": "keyword",
+        "fields": {
+          "keyword": {
+            "type": "keyword"
+          }
+        },
+      },
+      "created": {
+        "type": "date",
+        "format": "date_time||epoch_millis",
+      },
+      "fetched": {
+        "type": "date",
+        "format": "date_time||epoch_millis",
+      },
+      "processed": {
+        "type": "date",
+        "format": "date_time||epoch_millis",
+      },
+      "completed": {
+        "type": "date",
+        "format": "date_time||epoch_millis",
+      },
+      "status": {
+        "type": "keyword",
+      },
+      "info": {
+        "type": "text",
+      },
+      "mimeType": {
+        "type": "keyword",
+      },
+      "message": {
+        "type": "text"
+      }
+    }
+  }
+}
